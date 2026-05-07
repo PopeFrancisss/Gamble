@@ -1,0 +1,202 @@
+export default function App() {
+  return (
+    <div className="min-h-screen bg-zinc-950 text-white p-6 font-sans">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+          <div>
+            <h1 className="text-5xl font-black tracking-tight">
+              Demon Zcripts Pope
+            </h1>
+            <p className="text-zinc-400 mt-2 text-lg">
+              Betting + Factory Empire Website
+            </p>
+          </div>
+
+          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl px-6 py-4 shadow-2xl">
+            <p className="text-zinc-400 text-sm">Logged In As</p>
+            <h2 className="text-2xl font-bold">Pope</h2>
+            <p className="text-green-400 mt-1">Admin Access Enabled</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-xl">
+            <p className="text-zinc-400 mb-2">Cash</p>
+            <h2 className="text-4xl font-black text-green-400">$42,500</h2>
+            <p className="text-zinc-500 mt-2">Earned from bets + factories</p>
+          </div>
+
+          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-xl">
+            <p className="text-zinc-400 mb-2">Factories Owned</p>
+            <h2 className="text-4xl font-black text-cyan-400">7</h2>
+            <p className="text-zinc-500 mt-2">Generating passive income</p>
+          </div>
+
+          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-xl">
+            <p className="text-zinc-400 mb-2">Active Betting Events</p>
+            <h2 className="text-4xl font-black text-red-400">3</h2>
+            <p className="text-zinc-500 mt-2">Controlled by Pope</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-3xl font-black">Create Betting Event</h2>
+                <p className="text-zinc-400 mt-1">
+                  Only Pope can create or finish events
+                </p>
+              </div>
+
+              <button className="bg-green-500 hover:bg-green-400 transition px-5 py-3 rounded-2xl font-bold text-black">
+                Create Event
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <input
+                className="w-full bg-zinc-950 border border-zinc-700 rounded-2xl px-4 py-4 outline-none"
+                placeholder="Event Name"
+              />
+
+              <textarea
+                className="w-full bg-zinc-950 border border-zinc-700 rounded-2xl px-4 py-4 outline-none h-28"
+                placeholder="Describe the event..."
+              />
+
+              <div className="grid grid-cols-2 gap-4">
+                <input
+                  className="bg-zinc-950 border border-zinc-700 rounded-2xl px-4 py-4 outline-none"
+                  placeholder="Option 1"
+                />
+
+                <input
+                  className="bg-zinc-950 border border-zinc-700 rounded-2xl px-4 py-4 outline-none"
+                  placeholder="Option 2"
+                />
+              </div>
+
+              <button className="w-full bg-red-500 hover:bg-red-400 transition rounded-2xl py-4 font-black text-lg">
+                End Event + Pick Winner
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-3xl font-black">Factory Empire</h2>
+                <p className="text-zinc-400 mt-1">
+                  Buy upgrades for passive cash
+                </p>
+              </div>
+
+              <button className="bg-cyan-500 hover:bg-cyan-400 transition px-5 py-3 rounded-2xl font-bold text-black">
+                Collect Income
+              </button>
+            </div>
+
+            <div className="space-y-5">
+              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 flex items-center justify-between">
+                <div>
+                  <h3 className="text-2xl font-bold">Oil Factory</h3>
+                  <p className="text-zinc-400">+$250 every minute</p>
+                </div>
+
+                <button className="bg-green-500 hover:bg-green-400 transition px-4 py-3 rounded-xl font-bold text-black">
+                  Upgrade - $5,000
+                </button>
+              </div>
+
+              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 flex items-center justify-between">
+                <div>
+                  <h3 className="text-2xl font-bold">Steel Factory</h3>
+                  <p className="text-zinc-400">+$600 every minute</p>
+                </div>
+
+                <button className="bg-green-500 hover:bg-green-400 transition px-4 py-3 rounded-xl font-bold text-black">
+                  Upgrade - $15,000
+                </button>
+              </div>
+
+              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 flex items-center justify-between">
+                <div>
+                  <h3 className="text-2xl font-bold">Rocket Factory</h3>
+                  <p className="text-zinc-400">+$2,000 every minute</p>
+                </div>
+
+                <button className="bg-green-500 hover:bg-green-400 transition px-4 py-3 rounded-xl font-bold text-black">
+                  Upgrade - $40,000
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-3xl font-black">Live Betting Events</h2>
+              <p className="text-zinc-400 mt-1">
+                Place bets against your friends
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-2xl font-bold">CS2 Match</h3>
+                <span className="bg-red-500/20 text-red-300 px-3 py-1 rounded-full text-sm">
+                  LIVE
+                </span>
+              </div>
+
+              <p className="text-zinc-400 mb-5">
+                Who wins tonight?
+              </p>
+
+              <div className="grid grid-cols-2 gap-4">
+                <button className="bg-blue-500 hover:bg-blue-400 transition rounded-2xl py-4 font-black">
+                  Demon
+                </button>
+
+                <button className="bg-purple-500 hover:bg-purple-400 transition rounded-2xl py-4 font-black">
+                  Zcripts
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-2xl font-bold">Challenge Bet</h3>
+                <span className="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm">
+                  OPEN
+                </span>
+              </div>
+
+              <p className="text-zinc-400 mb-5">
+                Who finishes first?
+              </p>
+
+              <div className="grid grid-cols-2 gap-4">
+                <button className="bg-green-500 hover:bg-green-400 transition rounded-2xl py-4 font-black text-black">
+                  Pope
+                </button>
+
+                <button className="bg-pink-500 hover:bg-pink-400 transition rounded-2xl py-4 font-black">
+                  Demon
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 text-center text-zinc-500 text-sm">
+          Demon • Zcripts • Pope Betting Empire
+        </div>
+      </div>
+    </div>
+  )
+}
