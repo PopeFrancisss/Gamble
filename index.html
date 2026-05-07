@@ -1,200 +1,292 @@
 export default function App() {
+  const players = [
+    {
+      name: 'Pope',
+      money: '$182,000',
+      factories: 12,
+      income: '$4,500/min',
+      color: 'border-red-500'
+    },
+    {
+      name: 'Demon',
+      money: '$96,000',
+      factories: 7,
+      income: '$2,200/min',
+      color: 'border-cyan-500'
+    },
+    {
+      name: 'Zcripts',
+      money: '$133,000',
+      factories: 9,
+      income: '$3,000/min',
+      color: 'border-purple-500'
+    }
+  ]
+
   return (
-    <div className="min-h-screen bg-zinc-950 text-white p-6 font-sans">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+    <div className="min-h-screen bg-black text-white overflow-hidden font-sans">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,0,0,0.12),transparent_35%)]" />
+
+      <div className="relative z-10 flex min-h-screen">
+        <div className="w-[340px] bg-zinc-950 border-r border-zinc-900 p-6 flex flex-col justify-between">
           <div>
-            <h1 className="text-5xl font-black tracking-tight">
-              Demon Zcripts Pope
-            </h1>
-            <p className="text-zinc-400 mt-2 text-lg">
-              Betting + Factory Empire Website
-            </p>
-          </div>
-
-          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl px-6 py-4 shadow-2xl">
-            <p className="text-zinc-400 text-sm">Logged In As</p>
-            <h2 className="text-2xl font-bold">Pope</h2>
-            <p className="text-green-400 mt-1">Admin Access Enabled</p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-xl">
-            <p className="text-zinc-400 mb-2">Cash</p>
-            <h2 className="text-4xl font-black text-green-400">$42,500</h2>
-            <p className="text-zinc-500 mt-2">Earned from bets + factories</p>
-          </div>
-
-          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-xl">
-            <p className="text-zinc-400 mb-2">Factories Owned</p>
-            <h2 className="text-4xl font-black text-cyan-400">7</h2>
-            <p className="text-zinc-500 mt-2">Generating passive income</p>
-          </div>
-
-          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-xl">
-            <p className="text-zinc-400 mb-2">Active Betting Events</p>
-            <h2 className="text-4xl font-black text-red-400">3</h2>
-            <p className="text-zinc-500 mt-2">Controlled by Pope</p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-3xl font-black">Create Betting Event</h2>
-                <p className="text-zinc-400 mt-1">
-                  Only Pope can create or finish events
-                </p>
-              </div>
-
-              <button className="bg-green-500 hover:bg-green-400 transition px-5 py-3 rounded-2xl font-bold text-black">
-                Create Event
-              </button>
+            <div className="mb-10">
+              <h1 className="text-4xl font-black tracking-tight">
+                D Z P
+              </h1>
+              <p className="text-zinc-500 mt-2">
+                Betting Factory Empire
+              </p>
             </div>
 
-            <div className="space-y-4">
-              <input
-                className="w-full bg-zinc-950 border border-zinc-700 rounded-2xl px-4 py-4 outline-none"
-                placeholder="Event Name"
-              />
+            <div className="bg-black border border-zinc-800 rounded-3xl p-6 shadow-2xl mb-8">
+              <h2 className="text-2xl font-black mb-5">Login</h2>
 
-              <textarea
-                className="w-full bg-zinc-950 border border-zinc-700 rounded-2xl px-4 py-4 outline-none h-28"
-                placeholder="Describe the event..."
-              />
-
-              <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
                 <input
-                  className="bg-zinc-950 border border-zinc-700 rounded-2xl px-4 py-4 outline-none"
-                  placeholder="Option 1"
+                  placeholder="Username"
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-4 outline-none focus:border-red-500 transition"
                 />
 
                 <input
-                  className="bg-zinc-950 border border-zinc-700 rounded-2xl px-4 py-4 outline-none"
-                  placeholder="Option 2"
+                  type="password"
+                  placeholder="Password"
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-4 outline-none focus:border-red-500 transition"
                 />
-              </div>
 
-              <button className="w-full bg-red-500 hover:bg-red-400 transition rounded-2xl py-4 font-black text-lg">
-                End Event + Pick Winner
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-3xl font-black">Factory Empire</h2>
-                <p className="text-zinc-400 mt-1">
-                  Buy upgrades for passive cash
-                </p>
-              </div>
-
-              <button className="bg-cyan-500 hover:bg-cyan-400 transition px-5 py-3 rounded-2xl font-bold text-black">
-                Collect Income
-              </button>
-            </div>
-
-            <div className="space-y-5">
-              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 flex items-center justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold">Oil Factory</h3>
-                  <p className="text-zinc-400">+$250 every minute</p>
-                </div>
-
-                <button className="bg-green-500 hover:bg-green-400 transition px-4 py-3 rounded-xl font-bold text-black">
-                  Upgrade - $5,000
-                </button>
-              </div>
-
-              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 flex items-center justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold">Steel Factory</h3>
-                  <p className="text-zinc-400">+$600 every minute</p>
-                </div>
-
-                <button className="bg-green-500 hover:bg-green-400 transition px-4 py-3 rounded-xl font-bold text-black">
-                  Upgrade - $15,000
-                </button>
-              </div>
-
-              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 flex items-center justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold">Rocket Factory</h3>
-                  <p className="text-zinc-400">+$2,000 every minute</p>
-                </div>
-
-                <button className="bg-green-500 hover:bg-green-400 transition px-4 py-3 rounded-xl font-bold text-black">
-                  Upgrade - $40,000
+                <button className="w-full bg-red-600 hover:bg-red-500 transition rounded-2xl py-4 font-black text-lg shadow-lg shadow-red-900/40">
+                  Enter Empire
                 </button>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div className="mt-10 bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl">
-          <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-3xl font-black">Live Betting Events</h2>
-              <p className="text-zinc-400 mt-1">
-                Place bets against your friends
-              </p>
+              <h2 className="text-2xl font-black mb-5">Players</h2>
+
+              <div className="space-y-4">
+                {players.map((player) => (
+                  <div
+                    key={player.name}
+                    className={`bg-black border ${player.color} rounded-3xl p-5`}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-2xl font-black">{player.name}</h3>
+                      <div className="w-3 h-3 rounded-full bg-green-400" />
+                    </div>
+
+                    <div className="space-y-2 text-zinc-300">
+                      <p>Money: {player.money}</p>
+                      <p>Factories: {player.factories}</p>
+                      <p>Income: {player.income}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-2xl font-bold">CS2 Match</h3>
-                <span className="bg-red-500/20 text-red-300 px-3 py-1 rounded-full text-sm">
-                  LIVE
-                </span>
-              </div>
-
-              <p className="text-zinc-400 mb-5">
-                Who wins tonight?
-              </p>
-
-              <div className="grid grid-cols-2 gap-4">
-                <button className="bg-blue-500 hover:bg-blue-400 transition rounded-2xl py-4 font-black">
-                  Demon
-                </button>
-
-                <button className="bg-purple-500 hover:bg-purple-400 transition rounded-2xl py-4 font-black">
-                  Zcripts
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-2xl font-bold">Challenge Bet</h3>
-                <span className="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm">
-                  OPEN
-                </span>
-              </div>
-
-              <p className="text-zinc-400 mb-5">
-                Who finishes first?
-              </p>
-
-              <div className="grid grid-cols-2 gap-4">
-                <button className="bg-green-500 hover:bg-green-400 transition rounded-2xl py-4 font-black text-black">
-                  Pope
-                </button>
-
-                <button className="bg-pink-500 hover:bg-pink-400 transition rounded-2xl py-4 font-black">
-                  Demon
-                </button>
-              </div>
-            </div>
+          <div className="text-zinc-600 text-sm mt-8">
+            Demon • Zcripts • Pope
           </div>
         </div>
 
-        <div className="mt-10 text-center text-zinc-500 text-sm">
-          Demon • Zcripts • Pope Betting Empire
+        <div className="flex-1 p-8 overflow-y-auto">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-between mb-10">
+              <div>
+                <p className="text-red-500 font-bold tracking-[0.3em] uppercase text-sm mb-3">
+                  Pope Dashboard
+                </p>
+
+                <h1 className="text-6xl font-black leading-none">
+                  Your Empire
+                </h1>
+              </div>
+
+              <div className="bg-zinc-950 border border-zinc-800 rounded-3xl px-8 py-6 shadow-2xl text-right">
+                <p className="text-zinc-500 mb-2">Current Balance</p>
+                <h2 className="text-5xl font-black text-green-400">$182,000</h2>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+              <div className="bg-zinc-950 border border-zinc-900 rounded-[30px] p-6 shadow-2xl">
+                <p className="text-zinc-500 mb-3">Factories Owned</p>
+                <h2 className="text-5xl font-black">12</h2>
+              </div>
+
+              <div className="bg-zinc-950 border border-zinc-900 rounded-[30px] p-6 shadow-2xl">
+                <p className="text-zinc-500 mb-3">Income Per Minute</p>
+                <h2 className="text-5xl font-black text-cyan-400">$4,500</h2>
+              </div>
+
+              <div className="bg-zinc-950 border border-zinc-900 rounded-[30px] p-6 shadow-2xl">
+                <p className="text-zinc-500 mb-3">Active Bets</p>
+                <h2 className="text-5xl font-black text-red-500">5</h2>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 2xl:grid-cols-2 gap-8 mb-8">
+              <div className="bg-zinc-950 border border-zinc-900 rounded-[32px] p-7 shadow-2xl">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h2 className="text-4xl font-black">Your Factories</h2>
+                    <p className="text-zinc-500 mt-2">
+                      Upgrade factories for more money
+                    </p>
+                  </div>
+
+                  <button className="bg-green-500 hover:bg-green-400 text-black transition px-5 py-3 rounded-2xl font-black">
+                    Collect
+                  </button>
+                </div>
+
+                <div className="space-y-5">
+                  <div className="bg-black border border-zinc-800 rounded-3xl p-6 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-3xl font-black">Oil Factory</h3>
+                      <p className="text-zinc-500 mt-2">+$1,200/min</p>
+                    </div>
+
+                    <button className="bg-red-600 hover:bg-red-500 transition px-5 py-3 rounded-2xl font-black">
+                      Upgrade
+                    </button>
+                  </div>
+
+                  <div className="bg-black border border-zinc-800 rounded-3xl p-6 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-3xl font-black">Weapon Factory</h3>
+                      <p className="text-zinc-500 mt-2">+$2,000/min</p>
+                    </div>
+
+                    <button className="bg-red-600 hover:bg-red-500 transition px-5 py-3 rounded-2xl font-black">
+                      Upgrade
+                    </button>
+                  </div>
+
+                  <div className="bg-black border border-zinc-800 rounded-3xl p-6 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-3xl font-black">Server Factory</h3>
+                      <p className="text-zinc-500 mt-2">+$4,800/min</p>
+                    </div>
+
+                    <button className="bg-red-600 hover:bg-red-500 transition px-5 py-3 rounded-2xl font-black">
+                      Upgrade
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-zinc-950 border border-zinc-900 rounded-[32px] p-7 shadow-2xl">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h2 className="text-4xl font-black">Betting Events</h2>
+                    <p className="text-zinc-500 mt-2">
+                      Create and control betting events
+                    </p>
+                  </div>
+
+                  <button className="bg-cyan-500 hover:bg-cyan-400 text-black transition px-5 py-3 rounded-2xl font-black">
+                    New Event
+                  </button>
+                </div>
+
+                <div className="space-y-5">
+                  <div className="bg-black border border-zinc-800 rounded-3xl p-6">
+                    <div className="flex items-center justify-between mb-5">
+                      <h3 className="text-3xl font-black">CS2 Match</h3>
+
+                      <div className="bg-red-500/20 text-red-300 px-4 py-2 rounded-full text-sm font-bold">
+                        LIVE
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4 mb-5">
+                      <button className="bg-zinc-900 hover:bg-zinc-800 transition rounded-2xl py-4 font-black border border-zinc-700">
+                        Demon
+                      </button>
+
+                      <button className="bg-zinc-900 hover:bg-zinc-800 transition rounded-2xl py-4 font-black border border-zinc-700">
+                        Zcripts
+                      </button>
+                    </div>
+
+                    <button className="w-full bg-green-500 hover:bg-green-400 text-black transition rounded-2xl py-4 font-black text-lg">
+                      Pick Winner
+                    </button>
+                  </div>
+
+                  <div className="bg-black border border-zinc-800 rounded-3xl p-6">
+                    <h3 className="text-3xl font-black mb-5">Create Event</h3>
+
+                    <div className="space-y-4">
+                      <input
+                        placeholder="Event Name"
+                        className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-4 outline-none"
+                      />
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <input
+                          placeholder="Option 1"
+                          className="bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-4 outline-none"
+                        />
+
+                        <input
+                          placeholder="Option 2"
+                          className="bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-4 outline-none"
+                        />
+                      </div>
+
+                      <button className="w-full bg-red-600 hover:bg-red-500 transition rounded-2xl py-4 font-black text-lg">
+                        Launch Event
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-zinc-950 border border-zinc-900 rounded-[32px] p-8 shadow-2xl">
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <h2 className="text-4xl font-black">Global Leaderboard</h2>
+                  <p className="text-zinc-500 mt-2">
+                    Richest player wins
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-5">
+                {players.map((player, index) => (
+                  <div
+                    key={player.name}
+                    className="bg-black border border-zinc-800 rounded-3xl p-6 flex items-center justify-between"
+                  >
+                    <div className="flex items-center gap-5">
+                      <div className="w-14 h-14 rounded-2xl bg-red-600 flex items-center justify-center text-2xl font-black">
+                        #{index + 1}
+                      </div>
+
+                      <div>
+                        <h3 className="text-3xl font-black">{player.name}</h3>
+                        <p className="text-zinc-500 mt-1">
+                          {player.factories} Factories
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="text-right">
+                      <h3 className="text-3xl font-black text-green-400">
+                        {player.money}
+                      </h3>
+
+                      <p className="text-zinc-500 mt-1">{player.income}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
