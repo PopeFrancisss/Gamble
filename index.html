@@ -1,294 +1,291 @@
-export default function App() {
-  const players = [
-    {
-      name: 'Pope',
-      money: '$182,000',
-      factories: 12,
-      income: '$4,500/min',
-      color: 'border-red-500'
-    },
-    {
-      name: 'Demon',
-      money: '$96,000',
-      factories: 7,
-      income: '$2,200/min',
-      color: 'border-cyan-500'
-    },
-    {
-      name: 'Zcripts',
-      money: '$133,000',
-      factories: 9,
-      income: '$3,000/min',
-      color: 'border-purple-500'
-    }
-  ]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Random bs</title>
+<style>
+body{margin:0;font-family:Arial;background:#000;color:#fff}
+.bg{position:fixed;inset:0;background:radial-gradient(circle at top,#111,#000 60%);z-index:-1}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:10px 15px;border-bottom:1px solid #222;background:#0a0a0a}
+input{background:#111;border:1px solid #333;color:#fff;padding:6px;border-radius:6px}
+button{padding:6px 10px;border:none;border-radius:6px;cursor:pointer}
+.loginbtn{background:#e11d48;color:#fff}
+.adminbtn{background:#3b82f6;color:#fff}
+.resetbtn{background:#ef4444;color:#fff}
+.bluebtn{background:#2563eb;color:#fff}
+.greenbtn{background:#16a34a;color:#fff}
+.container{display:flex;flex-wrap:wrap;gap:10px;padding:15px}
+.card{border:1px solid #222;padding:10px;border-radius:10px;width:220px;background:#050505}
+.small{color:#aaa;font-size:12px}
+.betbox{border:1px solid #222;padding:10px;margin:10px;border-radius:10px;background:#050505}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center}
+.modal-content{background:#0a0a0a;padding:20px;border:1px solid #333;border-radius:10px;width:320px}
+</style>
+</head>
+<body>
+<div class="bg"></div>
 
-  return (
-    <div className="min-h-screen bg-black text-white overflow-hidden font-sans">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,0,0,0.12),transparent_35%)]" />
+<div class="topbar">
+  <div><b>Random bs</b></div>
 
-      <div className="relative z-10 flex min-h-screen">
-        <div className="w-[340px] bg-zinc-950 border-r border-zinc-900 p-6 flex flex-col justify-between">
-          <div>
-            <div className="mb-10">
-              <h1 className="text-4xl font-black tracking-tight">
-                D Z P
-              </h1>
-              <p className="text-zinc-500 mt-2">
-                Betting Factory Empire
-              </p>
-            </div>
+  <div>
+    <input id="u" placeholder="user" />
+    <input id="p" type="password" placeholder="pass" />
+    <button class="loginbtn" onclick="login()">Login</button>
+    <button class="adminbtn" onclick="openCreateBet()" id="createBtn" style="display:none">Create Bet</button>
+    <button class="resetbtn" onclick="resetGame()" id="resetBtn" style="display:none">Reset</button>
+  </div>
+</div>
 
-            <div className="bg-black border border-zinc-800 rounded-3xl p-6 shadow-2xl mb-8">
-              <h2 className="text-2xl font-black mb-5">Login</h2>
+<div class="container" id="users"></div>
 
-              <div className="space-y-4">
-                <input
-                  placeholder="Username"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-4 outline-none focus:border-red-500 transition"
-                />
+<h3 style="padding-left:15px">Active Bets</h3>
+<div id="bets"></div>
 
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-4 outline-none focus:border-red-500 transition"
-                />
+<!-- BET POPUP -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3 id="betTitle"></h3>
+    <div id="options"></div>
+    <input id="betAmt" placeholder="Bet amount" style="width:100%;margin-top:10px" />
+    <button class="greenbtn" onclick="placeBet()" style="width:100%;margin-top:10px">Place Bet</button>
+  </div>
+</div>
 
-                <button className="w-full bg-red-600 hover:bg-red-500 transition rounded-2xl py-4 font-black text-lg shadow-lg shadow-red-900/40">
-                  Enter Empire
-                </button>
-              </div>
-            </div>
+<!-- CREATE BET -->
+<div class="modal" id="createModal">
+  <div class="modal-content">
+    <h3>Create Bet</h3>
+    <input id="title" placeholder="Title" style="width:100%;margin-bottom:8px" />
+    <div id="outcomeBox"></div>
+    <button class="bluebtn" onclick="addOutcome()" style="width:100%;margin-top:8px">+ Add Outcome</button>
+    <button class="greenbtn" onclick="submitBet()" style="width:100%;margin-top:10px">Create</button>
+  </div>
+</div>
 
-            <div>
-              <h2 className="text-2xl font-black mb-5">Players</h2>
+<!-- WINNER SELECT POPUP -->
+<div class="modal" id="winnerModal">
+  <div class="modal-content">
+    <h3>Select Winner</h3>
+    <div id="winnerOptions"></div>
+  </div>
+</div>
 
-              <div className="space-y-4">
-                {players.map((player) => (
-                  <div
-                    key={player.name}
-                    className={`bg-black border ${player.color} rounded-3xl p-5`}
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-2xl font-black">{player.name}</h3>
-                      <div className="w-3 h-3 rounded-full bg-green-400" />
-                    </div>
+<script>
+let data=JSON.parse(localStorage.getItem("data"))||{
+  Pope:{pass:"Pope1",money:5000,level:0},
+  Zcripts:{pass:"Zcripts2",money:5000,level:0},
+  Demonkingss:{pass:"Demonkingss3",money:5000,level:0}
+};
 
-                    <div className="space-y-2 text-zinc-300">
-                      <p>Money: {player.money}</p>
-                      <p>Factories: {player.factories}</p>
-                      <p>Income: {player.income}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+let bets=JSON.parse(localStorage.getItem("bets"))||[];
+let currentUser=localStorage.getItem("user")||null;
 
-          <div className="text-zinc-600 text-sm mt-8">
-            Demon • Zcripts • Pope
-          </div>
-        </div>
+let selectedBet=null;
+let selectedOutcome=null;
 
-        <div className="flex-1 p-8 overflow-y-auto">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-between mb-10">
-              <div>
-                <p className="text-red-500 font-bold tracking-[0.3em] uppercase text-sm mb-3">
-                  Pope Dashboard
-                </p>
-
-                <h1 className="text-6xl font-black leading-none">
-                  Your Empire
-                </h1>
-              </div>
-
-              <div className="bg-zinc-950 border border-zinc-800 rounded-3xl px-8 py-6 shadow-2xl text-right">
-                <p className="text-zinc-500 mb-2">Current Balance</p>
-                <h2 className="text-5xl font-black text-green-400">$182,000</h2>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
-              <div className="bg-zinc-950 border border-zinc-900 rounded-[30px] p-6 shadow-2xl">
-                <p className="text-zinc-500 mb-3">Factories Owned</p>
-                <h2 className="text-5xl font-black">12</h2>
-              </div>
-
-              <div className="bg-zinc-950 border border-zinc-900 rounded-[30px] p-6 shadow-2xl">
-                <p className="text-zinc-500 mb-3">Income Per Minute</p>
-                <h2 className="text-5xl font-black text-cyan-400">$4,500</h2>
-              </div>
-
-              <div className="bg-zinc-950 border border-zinc-900 rounded-[30px] p-6 shadow-2xl">
-                <p className="text-zinc-500 mb-3">Active Bets</p>
-                <h2 className="text-5xl font-black text-red-500">5</h2>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 2xl:grid-cols-2 gap-8 mb-8">
-              <div className="bg-zinc-950 border border-zinc-900 rounded-[32px] p-7 shadow-2xl">
-                <div className="flex items-center justify-between mb-8">
-                  <div>
-                    <h2 className="text-4xl font-black">Your Factories</h2>
-                    <p className="text-zinc-500 mt-2">
-                      Upgrade factories for more money
-                    </p>
-                  </div>
-
-                  <button className="bg-green-500 hover:bg-green-400 text-black transition px-5 py-3 rounded-2xl font-black">
-                    Collect
-                  </button>
-                </div>
-
-                <div className="space-y-5">
-                  <div className="bg-black border border-zinc-800 rounded-3xl p-6 flex items-center justify-between">
-                    <div>
-                      <h3 className="text-3xl font-black">Oil Factory</h3>
-                      <p className="text-zinc-500 mt-2">+$1,200/min</p>
-                    </div>
-
-                    <button className="bg-red-600 hover:bg-red-500 transition px-5 py-3 rounded-2xl font-black">
-                      Upgrade
-                    </button>
-                  </div>
-
-                  <div className="bg-black border border-zinc-800 rounded-3xl p-6 flex items-center justify-between">
-                    <div>
-                      <h3 className="text-3xl font-black">Weapon Factory</h3>
-                      <p className="text-zinc-500 mt-2">+$2,000/min</p>
-                    </div>
-
-                    <button className="bg-red-600 hover:bg-red-500 transition px-5 py-3 rounded-2xl font-black">
-                      Upgrade
-                    </button>
-                  </div>
-
-                  <div className="bg-black border border-zinc-800 rounded-3xl p-6 flex items-center justify-between">
-                    <div>
-                      <h3 className="text-3xl font-black">Server Factory</h3>
-                      <p className="text-zinc-500 mt-2">+$4,800/min</p>
-                    </div>
-
-                    <button className="bg-red-600 hover:bg-red-500 transition px-5 py-3 rounded-2xl font-black">
-                      Upgrade
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-zinc-950 border border-zinc-900 rounded-[32px] p-7 shadow-2xl">
-                <div className="flex items-center justify-between mb-8">
-                  <div>
-                    <h2 className="text-4xl font-black">Betting Events</h2>
-                    <p className="text-zinc-500 mt-2">
-                      Create and control betting events
-                    </p>
-                  </div>
-
-                  <button className="bg-cyan-500 hover:bg-cyan-400 text-black transition px-5 py-3 rounded-2xl font-black">
-                    New Event
-                  </button>
-                </div>
-
-                <div className="space-y-5">
-                  <div className="bg-black border border-zinc-800 rounded-3xl p-6">
-                    <div className="flex items-center justify-between mb-5">
-                      <h3 className="text-3xl font-black">CS2 Match</h3>
-
-                      <div className="bg-red-500/20 text-red-300 px-4 py-2 rounded-full text-sm font-bold">
-                        LIVE
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 mb-5">
-                      <button className="bg-zinc-900 hover:bg-zinc-800 transition rounded-2xl py-4 font-black border border-zinc-700">
-                        Demon
-                      </button>
-
-                      <button className="bg-zinc-900 hover:bg-zinc-800 transition rounded-2xl py-4 font-black border border-zinc-700">
-                        Zcripts
-                      </button>
-                    </div>
-
-                    <button className="w-full bg-green-500 hover:bg-green-400 text-black transition rounded-2xl py-4 font-black text-lg">
-                      Pick Winner
-                    </button>
-                  </div>
-
-                  <div className="bg-black border border-zinc-800 rounded-3xl p-6">
-                    <h3 className="text-3xl font-black mb-5">Create Event</h3>
-
-                    <div className="space-y-4">
-                      <input
-                        placeholder="Event Name"
-                        className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-4 outline-none"
-                      />
-
-                      <div className="grid grid-cols-2 gap-4">
-                        <input
-                          placeholder="Option 1"
-                          className="bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-4 outline-none"
-                        />
-
-                        <input
-                          placeholder="Option 2"
-                          className="bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-4 outline-none"
-                        />
-                      </div>
-
-                      <button className="w-full bg-red-600 hover:bg-red-500 transition rounded-2xl py-4 font-black text-lg">
-                        Launch Event
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-zinc-950 border border-zinc-900 rounded-[32px] p-8 shadow-2xl">
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <h2 className="text-4xl font-black">Global Leaderboard</h2>
-                  <p className="text-zinc-500 mt-2">
-                    Richest player wins
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-5">
-                {players.map((player, index) => (
-                  <div
-                    key={player.name}
-                    className="bg-black border border-zinc-800 rounded-3xl p-6 flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-5">
-                      <div className="w-14 h-14 rounded-2xl bg-red-600 flex items-center justify-center text-2xl font-black">
-                        #{index + 1}
-                      </div>
-
-                      <div>
-                        <h3 className="text-3xl font-black">{player.name}</h3>
-                        <p className="text-zinc-500 mt-1">
-                          {player.factories} Factories
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="text-right">
-                      <h3 className="text-3xl font-black text-green-400">
-                        {player.money}
-                      </h3>
-
-                      <p className="text-zinc-500 mt-1">{player.income}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+function save(){
+  localStorage.setItem("data",JSON.stringify(data));
+  localStorage.setItem("bets",JSON.stringify(bets));
+  localStorage.setItem("user",currentUser);
 }
+
+function login(){
+  const u=document.getElementById("u").value;
+  const p=document.getElementById("p").value;
+
+  if(data[u]&&data[u].pass===p){
+    currentUser=u;
+    if(u==="Pope"){
+      document.getElementById("createBtn").style.display="inline-block";
+      document.getElementById("resetBtn").style.display="inline-block";
+    }
+    save();
+    render();
+    renderBets();
+  }else alert("Wrong login");
+}
+
+function requireLogin(){
+  if(!currentUser){alert("Login first");return false}
+  return true;
+}
+
+function upgrade(name){
+  if(!requireLogin()) return;
+  if(currentUser!==name) return alert("Only your account");
+
+  const u=data[name];
+  const cost=(u.level+1)*2000;
+
+  if(u.money>=cost){
+    u.money-=cost;
+    u.level++;
+    save();
+    render();
+  }
+}
+
+// CREATE BET
+function openCreateBet(){
+  if(currentUser!=="Pope") return;
+  document.getElementById("createModal").style.display="flex";
+  document.getElementById("outcomeBox").innerHTML="";
+  document.getElementById("title").value="";
+}
+
+function addOutcome(){
+  const div=document.createElement("div");
+  div.innerHTML=`<input placeholder='Outcome' style='width:100%;margin:5px 0' />`;
+  document.getElementById("outcomeBox").appendChild(div);
+}
+
+function submitBet(){
+  const title=document.getElementById("title").value;
+  const inputs=document.querySelectorAll("#outcomeBox input");
+
+  let outcomes=[];
+  inputs.forEach(i=>{if(i.value) outcomes.push(i.value)});
+
+  bets.push({title,outcomes,active:true,winner:null,bets:[]});
+
+  document.getElementById("createModal").style.display="none";
+  save();
+  renderBets();
+}
+
+// BETTING
+function openBet(i,o){
+  if(!requireLogin()) return;
+
+  selectedBet=i;
+  selectedOutcome=o;
+
+  document.getElementById("betTitle").innerText=bets[i].title;
+  document.getElementById("options").innerText="Selected: "+o;
+  document.getElementById("modal").style.display="flex";
+}
+
+function placeBet(){
+  const amt=parseInt(document.getElementById("betAmt").value);
+  if(!amt) return;
+
+  data[currentUser].money-=amt;
+
+  bets[selectedBet].bets.push({user:currentUser,choice:selectedOutcome,amt});
+
+  document.getElementById("modal").style.display="none";
+  save();
+  render();
+}
+
+// WINNER POPUP
+let winnerBetIndex=null;
+
+function openWinner(i){
+  if(currentUser!=="Pope") return;
+
+  winnerBetIndex=i;
+  const b=bets[i];
+
+  const box=document.getElementById("winnerOptions");
+  box.innerHTML="";
+
+  b.outcomes.forEach(o=>{
+    const btn=document.createElement("button");
+    btn.className="bluebtn";
+    btn.style.margin="5px";
+    btn.innerText=o;
+    btn.onclick=()=>setWinner(o);
+    box.appendChild(btn);
+  });
+
+  document.getElementById("winnerModal").style.display="flex";
+}
+
+function setWinner(winner){
+  let b=bets[winnerBetIndex];
+  b.winner=winner;
+
+  // pool system
+  let totalPool=0;
+  let winners=[];
+
+  b.bets.forEach(x=>{
+    totalPool+=x.amt;
+    if(x.choice===winner) winners.push(x);
+  });
+
+  let winnerPool=winners.reduce((a,b)=>a+b.amt,0);
+
+  winners.forEach(x=>{
+    let share=(x.amt/winnerPool)*totalPool;
+    data[x.user].money+=share;
+  });
+
+  b.active=false;
+
+  document.getElementById("winnerModal").style.display="none";
+  save();
+  render();
+  renderBets();
+}
+
+// RESET
+function resetGame(){
+  const pass=prompt("Enter reset password");
+  if(pass!=="DORG") return alert("Wrong password");
+
+  localStorage.clear();
+  location.reload();
+}
+
+function renderBets(){
+  const c=document.getElementById("bets");
+  c.innerHTML="";
+
+  bets.forEach((b,i)=>{
+    const div=document.createElement("div");
+    div.className="betbox";
+
+    if(b.active){
+      div.innerHTML=`<b>${b.title}</b><br>`+
+      b.outcomes.map(o=>`<button class='bluebtn' onclick="openBet(${i},'${o}')">${o}</button>`).join(" ")+
+      (currentUser==="Pope"?`<br><button class='greenbtn' onclick="openWinner(${i})">Choose Winner</button>`:"");
+    }else{
+      div.innerHTML=`<b>${b.title}</b> - Winner: ${b.winner}`;
+    }
+
+    c.appendChild(div);
+  });
+}
+
+function render(){
+  const c=document.getElementById("users");
+  c.innerHTML="";
+
+  Object.keys(data).forEach(n=>{
+    const u=data[n];
+
+    const div=document.createElement("div");
+    div.className="card";
+
+    div.innerHTML=`
+      <h3>${n}</h3>
+      <p>$${u.money}</p>
+      <p class='small'>Tier ${u.level}</p>
+      <button class='bluebtn' onclick="upgrade('${n}')">Upgrade</button>
+    `;
+
+    c.appendChild(div);
+  });
+
+  save();
+}
+
+render();
+renderBets();
+</script>
+</body>
+</html>
